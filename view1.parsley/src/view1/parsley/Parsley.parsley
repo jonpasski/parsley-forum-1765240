@@ -1,0 +1,39 @@
+import view1.parsley.ParsleySaveableTreeFormView
+import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain
+import org.eclipse.emf.parsley.edit.domain.GlobalAdapterFactoryEditingDomainProvider
+import org.eclipse.emf.parsley.runtime.ui.PluginUtil
+import model.xcore.XcoreFactory
+import org.eclipse.emf.common.util.URI
+
+/* view1.parsley EMF Parsley Dsl Module file */
+module view1.parsley {
+
+	bindings {
+		provide AdapterFactoryEditingDomain -> GlobalAdapterFactoryEditingDomainProvider
+	}
+
+	parts {
+		viewpart view1.parsley {
+			viewname "View 1"
+			viewclass ParsleySaveableTreeFormView
+		}
+	}
+
+	configurator {
+		resourceURI {
+			ParsleySaveableTreeFormView -> {
+				val bc = PluginUtil.getBundle(ParsleyInjectorProvider).bundleContext
+				val file = bc.getBundle().getDataFile("view1.example")
+				URI.createFileURI(file.getAbsolutePath())
+			}
+		}
+	}
+
+	resourceManager {
+		var XcoreFactory factory = XcoreFactory.eINSTANCE
+		initializeResource {
+			it.contents += factory.createView1
+		}
+	}
+
+}

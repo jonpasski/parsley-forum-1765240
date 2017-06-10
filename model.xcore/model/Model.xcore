@@ -1,0 +1,22 @@
+@GenModel(
+	fileExtensions="example"
+)
+package model.xcore
+
+class View1 {
+	String name = "view 1"
+	contains View1Object[] view1Objects
+}
+
+class View1Object {
+	String name = "view 1 object"
+}
+
+class View2 {
+	String name = "view 2"
+	contains View2Object[] view2Objects
+}
+
+class View2Object {
+	String name = "view 2 object"
+}
